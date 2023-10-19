@@ -45,4 +45,16 @@ async function addContact(name, email, phone) {
   return newContact;
 }
 
-export { listContacts, getContactById, addContact };
+async function removeContact(contactId) {
+  const contacts = await listContacts();
+  const filteredContacts = contacts.filter(
+    (contact) => contact.id !== contactId
+  );
+
+  if (filteredContacts.length === contacts.length) {
+    throw new Error(`Contact with ID ${contactId} not found.`.red);
+  }
+  fs.writeFile(contactsPath, JSON.stringify(filteredContacts));
+}
+
+export { listContacts, getContactById, addContact, removeContact };

@@ -1,4 +1,9 @@
-import { listContacts, getContactById, addContact } from "./contacts.js";
+import {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+} from "./contacts.js";
 import { Command } from "commander";
 import colors from "colors";
 
@@ -36,6 +41,10 @@ async function invokeAction({ action, id, name, email, phone }) {
     case "add":
       const newContact = await addContact(name, email, phone);
       console.table(newContact);
+      break;
+
+    case "remove":
+      removeContact(id);
       break;
 
     default:
