@@ -25,19 +25,23 @@ const argv = program.opts();
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      const contacts = await listContacts();
-      console.log("\nContact list".bgBlue);
-      console.table(contacts);
+      try {
+        const contacts = await listContacts();
+        console.log("\nContact list".bgBlue);
+        console.table(contacts);
+      } catch (error) {
+        console.error(error);
+      }
       break;
 
     case "get":
-      const contact = await getContactById(id);
-      if (contact) {
+      try {
+        const contact = await getContactById(id);
         console.log(`\nContact with ID: ${id}`.bgBlue);
         console.table(contact);
-        return;
+      } catch (error) {
+        console.error(error);
       }
-      console.error(`\nThere is no contact with id ${id} `.bgRed);
       break;
 
     case "add":

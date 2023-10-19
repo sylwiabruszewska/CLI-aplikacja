@@ -6,22 +6,22 @@ import colors from "colors";
 const contactsPath = path.join(process.cwd(), "db", "contacts.json");
 
 async function listContacts() {
-  try {
-    const data = await fs.readFile(contactsPath, { encoding: "utf-8" });
-    return JSON.parse(data);
-  } catch (error) {
-    console.error(error.message);
+  const contacts = await fs.readFile(contactsPath, { encoding: "utf-8" });
+
+  if (!contacts) {
+    throw new Error("\nThere are no contacts".bgRed);
   }
+  JSON.parse(contacts);
 }
 
 async function getContactById(contactId) {
   const contacts = await listContacts();
   const contact = contacts.find((contact) => contact.id === contactId);
 
-  if (contact) {
-    return contact;
+  if (!contact) {
+    throw new Error(`\nThere is no contact with id ${contactId}`.bgRed);
   }
-  return null;
+  return contact;
 }
 
 async function addContact(name, email, phone) {
