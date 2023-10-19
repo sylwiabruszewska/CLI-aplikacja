@@ -1,4 +1,4 @@
-import { listContacts } from "./contacts.js";
+import { listContacts, getContactById } from "./contacts.js";
 import { Command } from "commander";
 
 const program = new Command();
@@ -16,11 +16,20 @@ program
 program.parse(process.argv);
 const argv = program.opts();
 
-async function invokeAction({ action }) {
+async function invokeAction({ action, id }) {
   switch (action) {
     case "list":
       const contacts = await listContacts();
       console.table(contacts);
+      break;
+
+    case "get":
+      const contact = await getContactById(id);
+      if (contact) {
+        console.table(contact);
+        return;
+      }
+      console.error(`\nThere is no contact with id ${id} `.red);
       break;
 
     default:

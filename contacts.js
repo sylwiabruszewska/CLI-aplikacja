@@ -12,4 +12,14 @@ async function listContacts() {
   }
 }
 
-export { listContacts };
+async function getContactById(contactId) {
+  const contacts = await listContacts();
+  const contact = contacts.find((contact) => contact.id === contactId);
+
+  if (contact) {
+    return contact;
+  }
+  return null;
+}
+
+export { listContacts, getContactById };
