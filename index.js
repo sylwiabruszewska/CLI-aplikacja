@@ -41,14 +41,23 @@ async function invokeAction({ action, id, name, email, phone }) {
       break;
 
     case "add":
-      const newContact = await addContact(name, email, phone);
-      console.log("\nContact  added!".bgBlue);
-      console.table(newContact);
+      try {
+        const newContact = await addContact(name, email, phone);
+        console.log("\nContact added!".bgBlue);
+        console.table(newContact);
+      } catch (error) {
+        console.error(error);
+      }
+
       break;
 
     case "remove":
-      removeContact(id);
-      console.log("\nContact deleted!".bgBlue);
+      try {
+        await removeContact(id);
+        console.log("\nContact deleted!".bgBlue);
+      } catch (error) {
+        console.error(error);
+      }
       break;
 
     default:
