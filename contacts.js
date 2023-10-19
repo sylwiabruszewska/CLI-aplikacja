@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { nanoid } from "nanoid";
 
 const contactsPath = path.join(process.cwd(), "db", "contacts.json");
 
@@ -22,4 +23,23 @@ async function getContactById(contactId) {
   return null;
 }
 
-export { listContacts, getContactById };
+async function addContact(name, email, phone) {
+  const contacts = await listContacts();
+  const newContact = {
+    id: nanoid(),
+    name,
+    email,
+    phone,
+  };
+  const contactWithSameName = contacts.find((contact) => contact.name === name);
+
+  if (contactWithSameName) {
+    throw new Error(`Contact with name ${name} already exists in contacts.`);
+  }
+
+  contacts.push(newContact);
+  fs.writeFile(contactsPath, JSON.stringify(contacts));
+  return newContact;
+}
+
+export { listContacts, getContactById, addContact };
