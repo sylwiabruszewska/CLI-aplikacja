@@ -2,10 +2,10 @@
 
 This command-line interface allows you to manage your contacts easily. You can perform various actions using the following commands:
 
-`listContacts()`: Retrieves and displays the list of all contacts in a table format.
-`getContactById(contactId)`: Fetches a contact by its unique ID.
-`addContact(name, email, phone)`: Adds a new contact with the specified name, email, and phone number.
-`removeContact(contactId)`: Removes a contact by its ID.
+- `listContacts()`: Retrieves and displays the list of all contacts in a table format.
+- `getContactById(contactId)`: Fetches a contact by its unique ID.
+- `addContact(name, email, phone)`: Adds a new contact with the specified name, email, and phone number.
+- `removeContact(contactId)`: Removes a contact by its ID.
 
 ## Getting Started
 
