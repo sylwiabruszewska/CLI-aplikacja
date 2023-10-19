@@ -11,7 +11,7 @@ async function listContacts() {
   if (!contacts) {
     throw new Error("\nThere are no contacts".bgRed);
   }
-  JSON.parse(contacts);
+  return JSON.parse(contacts);
 }
 
 async function getContactById(contactId) {
@@ -36,7 +36,7 @@ async function addContact(name, email, phone) {
 
   if (contactWithSameName) {
     throw new Error(
-      `Contact with name ${name} already exists in contacts.`.red
+      `Contact with name ${name} already exists in contacts.`.bgRed
     );
   }
 
@@ -52,7 +52,7 @@ async function removeContact(contactId) {
   );
 
   if (filteredContacts.length === contacts.length) {
-    throw new Error(`Contact with ID ${contactId} not found.`.red);
+    throw new Error(`Contact with ID ${contactId} not found.`.bgRed);
   }
   fs.writeFile(contactsPath, JSON.stringify(filteredContacts));
 }
