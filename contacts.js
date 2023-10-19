@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
+import colors from "colors";
 
 const contactsPath = path.join(process.cwd(), "db", "contacts.json");
 
@@ -34,7 +35,9 @@ async function addContact(name, email, phone) {
   const contactWithSameName = contacts.find((contact) => contact.name === name);
 
   if (contactWithSameName) {
-    throw new Error(`Contact with name ${name} already exists in contacts.`);
+    throw new Error(
+      `Contact with name ${name} already exists in contacts.`.red
+    );
   }
 
   contacts.push(newContact);

@@ -1,5 +1,6 @@
 import { listContacts, getContactById, addContact } from "./contacts.js";
 import { Command } from "commander";
+import colors from "colors";
 
 const program = new Command();
 
